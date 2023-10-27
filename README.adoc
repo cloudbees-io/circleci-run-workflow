@@ -1,0 +1,104 @@
+= CloudBees action: Run a CircleCI workflow
+
+Use this action to trigger a workflow in CircleCI, a cloud-based CI/CD platform.
+
+== Inputs
+
+[cols="2a,1a,1a,3a",options="header"]
+.Input details
+|===
+
+| Input name
+| Data type
+| Required?
+| Description
+
+| `url`
+| String
+| No
+| The CircleCI server URL.
+If not specified, uses `https://circleci.com/`.
+
+| `token`
+| String
+| Yes
+| The CircleCI token.
+
+| `vcs-name`
+| String
+| Yes
+| The CircleCI source code management system used.
+Supported are GitHub (`gh`) and Bitbucket (`bb`).
+
+| `org-name`
+| String
+| Yes
+| The CircleCI organization name.
+
+| `repo-name`
+| String
+| Yes
+| The CircleCI repository name.
+
+| `branch-name`
+| String
+| Yes
+| The CircleCI branch name.
+
+| `workflow-name`
+| String
+| Yes
+| The CircleCI workflow name.
+
+| `test-type`
+| String
+| No
+| Specifies the test type for generating a job test report.
+Supported test types are JUnit (`junit`) and TestNG (`testng`).
+
+| `test-result-location`
+| String
+| No
+| Specifies the test report file location.
+Accepts pattern matching, such as `my-dir/*/my-file`.
+
+| `parameters`
+| JSON
+| No
+| Any additional parameters, formatted as JSON data in key/value pairs.
+|===
+
+== Usage example
+
+In your YAML file, add:
+
+[source,yaml]
+----
+jobs:
+  my-circleci-workflow:
+    steps:
+      - name: Run a CircleCI workflow
+        uses: cloudbees-io/circleci-run-workflow@v2
+        with:
+          url: ${{ vars.CIRCLECI_URL }}
+          token: ${{ secrets.CIRCLECI_TOKEN }}
+          vcs-name: gh
+          org-name: testOrg
+          repo-name: repo1
+          branch-name: test-branch
+          workflow-name: workflow1
+          test-type: Junit
+          test-result-location: junit-service*
+          parameters: '{}'
+
+----
+
+== License
+
+This code is made available under the 
+link:https://opensource.org/license/mit/[MIT license].
+
+== References
+
+* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform-actions/latest/[using actions in CloudBees workflows].
+* Learn about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform/latest/[the CloudBees platform].
