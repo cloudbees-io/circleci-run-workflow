@@ -41,7 +41,8 @@ runs:
   steps:
     - id: invoke-circleci-job
       name: invoke-circleci-job
-      uses: docker://public.ecr.aws/l7o7z1g8/actions/circleci-actions:main-6346e3d4f31837063c4e9d7903951e91e8943ebb
+      # uses: docker://public.ecr.aws/l7o7z1g8/actions/circleci-actions:main-6346e3d4f31837063c4e9d7903951e91e8943ebb
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/circleci-actions:main-f6260e19d5b9de542eb5ed8c78f06f14a2f716ed 
       shell: sh
       env:
         CONFIG_JSON: '{"metaInfo":{"url":"${{ inputs.url }}","toolType":"CIRCLECI","username":"","password":"${{ inputs.token }}","vcs":"${{ inputs.vcs-name }}","orgname":"${{ inputs.org-name }}","reponame":"${{ inputs.repo-name }}","jobName":"${{ inputs.workflow-name }}","branchname":"${{ inputs.branch-name }}","testType":"${{ inputs.test-type }}","fileName":"${{ inputs.test-result-location }}","parameters":{}}}'
